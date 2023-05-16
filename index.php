@@ -40,6 +40,20 @@
 
     ];
 
+    $hotelList = $hotels;
+    
+    // Serve se il valore del post è nullo oppure non è stato ancora valorizzato.
+    $strPost = $_POST['parking'] ?? "false";
+
+    if($strPost == 'false'){
+      $hotelList = $hotels;
+    }elseif($strPost == 'true'){
+      $hotelList = [];
+      foreach ($hotels as $hotel) {
+        $hotel['parking'] === true ? array_push($hotelList, $hotel) : null;
+      }
+    };
+
 ?>
 
 <!DOCTYPE html>
@@ -54,12 +68,20 @@
   <body>
     <div class="pg-content-wrapper vh-100 bg-dark">
       <div class="container py-5">
-        <table class="table w-100 rounded-3 overflow-hidden">
+        <form action="./index.php" method="POST" class="mb-3 w-25 d-flex">
+          <select name="parking" class="form-select me-2">
+            <option value="false" selected>Tutti gli hotel</option>
+            <option value="true">Hotel con parcheggio</option>
+          </select>
+          <button type="submit" class="btn btn-warning">Submit</button>
+        </form>
+
+        <table class="table w-100 rounded-3 overflow-hidden text-center">
           <thead>
-            
+
             <tr class="table-light border-bottom-0">
 
-              <?php foreach ($hotels[0] as $key => $hotel): ?>
+              <?php foreach ($hotelList[0] as $key => $hotel): ?>
                 <th scope="col"><?php echo strtoupper($key); ?></th>
               <?php endforeach; ?>
 
@@ -69,22 +91,22 @@
 
           <tbody>
 
-          <?php foreach ($hotels as $hotel): ?>
+          <?php foreach ($hotelList as $hotel): ?>
 
             <tr class="table-light border-bottom-0">
 
               <?php foreach ($hotel as $key => $value): ?>
                 <?php if($key === 'parking'){
-                  $value ? $value = '<span class="text-success">Parcheggio disponibile</span>' : $value = '<span class="text-danger">Parcheggio non disponibile</span>';
-                }elseif($key === 'vote' ){
-                  if($value === 3){
-                    $value = "<span class='text-warning'>$value</span>";
-                  }elseif($value <=3){
-                    $value = "<span class='text-danger'>$value</span>";
-                  }else{
-                    $value = "<span class='text-success'>$value</span>";
-                  }
-                };
+                    $value ? $value = '<span class="text-success">Parcheggio disponibile</span>' : $value = '<span class="text-danger">Parcheggio non disponibile</span>';
+                  }elseif($key === 'vote' ){
+                    if($value === 3){
+                      $value = "<span class='text-warning'>$value</span>";
+                    }elseif($value <=3){
+                      $value = "<span class='text-danger'>$value</span>";
+                    }else{
+                      $value = "<span class='text-success'>$value</span>";
+                    }
+                  };
                 ?>
 
                 <td><?php echo $value ?></td>
