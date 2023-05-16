@@ -41,8 +41,8 @@
     ];
 
     $hotelList = $hotels;
-    
-    // Serve se il valore del post è nullo oppure non è stato ancora valorizzato.
+
+    // I due punti interrogativi servono se il valore del post è nullo oppure non è stato ancora valorizzato.
     $strPost = $_POST['parking'] ?? "false";
 
     if($strPost == 'false'){
@@ -50,7 +50,7 @@
     }elseif($strPost == 'true'){
       $hotelList = [];
       foreach ($hotels as $hotel) {
-        $hotel['parking'] === true ? array_push($hotelList, $hotel) : null;
+        $hotel['parking'] ? array_push($hotelList, $hotel) : null;
       }
     };
 
