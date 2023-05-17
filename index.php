@@ -2,55 +2,55 @@
 
   $hotels = [
 
-      [
-          'name' => 'Hotel Belvedere',
-          'description' => 'Hotel Belvedere Descrizione',
-          'parking' => true,
-          'vote' => 4,
-          'distance_to_center' => 10.4
-      ],
-      [
-          'name' => 'Hotel Futuro',
-          'description' => 'Hotel Futuro Descrizione',
-          'parking' => true,
-          'vote' => 2,
-          'distance_to_center' => 2
-      ],
-      [
-          'name' => 'Hotel Rivamare',
-          'description' => 'Hotel Rivamare Descrizione',
-          'parking' => false,
-          'vote' => 1,
-          'distance_to_center' => 1
-      ],
-      [
-          'name' => 'Hotel Bellavista',
-          'description' => 'Hotel Bellavista Descrizione',
-          'parking' => false,
-          'vote' => 5,
-          'distance_to_center' => 5.5
-      ],
-      [
-          'name' => 'Hotel Milano',
-          'description' => 'Hotel Milano Descrizione',
-          'parking' => true,
-          'vote' => 2,
-          'distance_to_center' => 50
-      ],
+    [
+      'name' => 'Hotel Belvedere',
+      'description' => 'Hotel Belvedere Descrizione',
+      'parking' => true,
+      'vote' => 4,
+      'distance_to_center' => 10.4
+    ],
+    [
+      'name' => 'Hotel Futuro',
+      'description' => 'Hotel Futuro Descrizione',
+      'parking' => true,
+      'vote' => 2,
+      'distance_to_center' => 2
+    ],
+    [
+      'name' => 'Hotel Rivamare',
+      'description' => 'Hotel Rivamare Descrizione',
+      'parking' => false,
+      'vote' => 1,
+      'distance_to_center' => 1
+    ],
+    [
+      'name' => 'Hotel Bellavista',
+      'description' => 'Hotel Bellavista Descrizione',
+      'parking' => false,
+      'vote' => 5,
+      'distance_to_center' => 5.5
+    ],
+    [
+      'name' => 'Hotel Milano',
+      'description' => 'Hotel Milano Descrizione',
+      'parking' => true,
+      'vote' => 2,
+      'distance_to_center' => 50
+    ],
 
-    ];
+  ];
 
-    // I due punti interrogativi servono se il valore del post è nullo oppure non è stato ancora valorizzato.
-    $strPost = $_POST['parking'] ?? "false";
+  // I due punti interrogativi servono se il valore del post è nullo oppure non è stato ancora valorizzato.
+  $strPost = $_POST['parking'] ?? "false";
 
-    if($strPost == 'false'){
-      $hotelList = $hotels;
-    }elseif($strPost == 'true'){
-      $hotelList = [];
-      foreach ($hotels as $hotel) {
-        $hotel['parking'] ? array_push($hotelList, $hotel) : null;
-      }
-    };
+  if($strPost == 'false'){
+    $hotelList = $hotels;
+  }else{
+    $hotelList = [];
+    foreach ($hotels as $hotel) {
+      if($hotel['parking']) array_push($hotelList, $hotel);
+    }
+  };
 
 ?>
 
