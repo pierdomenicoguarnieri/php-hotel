@@ -40,8 +40,6 @@
 
     ];
 
-    $hotelList = $hotels;
-
     // I due punti interrogativi servono se il valore del post è nullo oppure non è stato ancora valorizzato.
     $strPost = $_POST['parking'] ?? "false";
 
